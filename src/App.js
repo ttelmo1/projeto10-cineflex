@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
+import Sessions from "./Components/Sessions";
 import { GlobalStyle } from "./Styles/GlobalStyle";
 
 
@@ -10,7 +11,8 @@ export default function App() {
       <GlobalStyle />
         <StyleApp>
           <Header />
-          <Home />
+          {/* <Home /> */}
+          <Sessions />
         </StyleApp>
     </>
   );
