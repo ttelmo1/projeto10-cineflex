@@ -37,7 +37,7 @@ const SessionsStyle = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    just            y-content: center;
+    justify-content: center;
     margin-bottom: 125px;
                 
 
