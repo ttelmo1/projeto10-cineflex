@@ -39,7 +39,7 @@ export default function Home() {
     return (
         <HomeStyle>
             <p>Selecione o filme</p>
-            <div>
+            <div className="movie-list">
                 {movieList?.map((m) => <Movie id={m.id} title={m.title} posterURL={m.posterURL} key={m.id} />)}
             </div>
         </HomeStyle>
@@ -63,7 +63,7 @@ const HomeStyle = styled.div`
         margin-bottom: 50px;
     }
 
-    div{
+    .movie-list{
         display: flex;
         flex-wrap: wrap;
         gap: 10px 20px; 

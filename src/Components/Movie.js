@@ -1,5 +1,5 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
-
 
 
 
@@ -7,8 +7,10 @@ export default function Movie(props) {
     const { id, title, posterURL } = props
 
     return (
-        <MovieStyle size={"small"}>
-            <img src={posterURL} size={"small"}/>
+        <MovieStyle size={""}>
+            <Link to={`/sessoes/${id}`}>
+                <img src={posterURL} size={""} />
+            </Link>
         </MovieStyle>
     )
 }

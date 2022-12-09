@@ -1,10 +1,11 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import Movie from "./Movie"
 import Seat from "./Seat"
 
-export default function Seats(props){
+export default function Seats(props) {
     const [seats, setSeats] = useState(undefined)
 
     // const [size] = props
@@ -19,44 +20,47 @@ export default function Seats(props){
     }, [])
 
 
-    return(
+    return (
         <>
-        <SeatsStyle>
-            <p className="select-seats">Selecione o(s) assento(s)</p>
-            <div className="seats">
-                {seats?.seats.map((s) => <Seat name={s.name} />)}
-            </div>
-            <div className="legend">
-                <div>
-                    <div className="selected"></div>
-                    <p>Selecionado</p>
+            <SeatsStyle>
+                <p className="select-seats">Selecione o(s) assento(s)</p>
+                <div className="seats">
+                    {seats?.seats.map((s) => <Seat name={s.name} />)}
                 </div>
-                <div>
-                    <div className="available"></div>
-                    <p>Disponível</p>
+                <div className="legend">
+                    <div>
+                        <div className="selected"></div>
+                        <p>Selecionado</p>
+                    </div>
+                    <div>
+                        <div className="available"></div>
+                        <p>Disponível</p>
+                    </div>
+                    <div>
+                        <div className="unavailable"></div>
+                        <p>Indisponível</p>
+                    </div>
                 </div>
-                <div>
-                    <div className="unavailable"></div>
-                    <p>Indisponível</p>
+                <div className="info">
+                    <p>Nome do comprador:</p>
+                    <input type="text" placeholder="Digite seu nome..." />
                 </div>
-            </div>
-            <div className="info">
-                <p>Nome do comprador:</p>
-                <input type="text" placeholder="Digite seu nome..." />
-            </div>
-            <div className="info">
-                <p>CPF do comprador:</p>
-                <input type="text" placeholder="Digite seu CPF..." />
-            </div>
-            <button className="book-button">Reservar assento(s)</button>
-        </SeatsStyle>
-        <FooterSeats>
-            <Movie posterURL={seats?.movie.posterURL} size={"small"}/>
-            <div>
-                <p>{seats?.movie.title}</p>
-                <p>{seats?.day.weekday} - {seats?.name}</p>
-            </div>
-        </FooterSeats>
+                <div className="info">
+                    <p>CPF do comprador:</p>
+                    <input type="text" placeholder="Digite seu CPF..." />
+                </div>
+                <Link to="/sucesso">
+                    <button className="book-button">Reservar assento(s)</button>
+                </Link>
+
+            </SeatsStyle>
+            <FooterSeats>
+                <Movie posterURL={seats?.movie.posterURL} size={"small"} />
+                <div>
+                    <p>{seats?.movie.title}</p>
+                    <p>{seats?.day.weekday} - {seats?.name}</p>
+                </div>
+            </FooterSeats>
         </>
     )
 }
