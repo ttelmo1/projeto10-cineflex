@@ -4,15 +4,12 @@ import { useParams } from "react-router-dom"
 import styled from "styled-components"
 import Session from "./Session"
 
-// const BASE_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/movies'
 
 export default function Sessions() {
 
     const {idFilme} = useParams()
     console.log(useParams)
     const [sessionList, setSessionList] = useState(undefined)
-    
-    
     
 
     useEffect(() => {
@@ -22,11 +19,6 @@ export default function Sessions() {
             console.log(sessionList)
         })
     }, [])
-
-    // useEffect(() => {
-    //     axios.get(`${BASE_URL}/${id}/showtimes`)
-    //     .then(res => setSessionList(res.data))
-    //   }, [id])
 
     if (sessionList === undefined) {
         return (

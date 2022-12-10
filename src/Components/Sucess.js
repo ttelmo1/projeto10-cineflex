@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Sucess() {
+export default function Sucess(props) {
+    const {nameSucess, cpfSucess, idSucess, movieName, hour} = props
+
+    console.log(nameSucess)
+    console.log(cpfSucess)
+    console.log(idSucess)
     return (
         <SucessStyle>
             <div className="ticket-sucess-div">
@@ -10,21 +15,21 @@ export default function Sucess() {
             <div className="movie">
                 <p className="big">Filme e sessão</p>
                 <div className="movie-details">
-                    <p className="small">nome do filme</p>
-                    <p className="small">data e hora</p>
+                    <p className="small">{movieName}</p>
+                    <p className="small">{hour}</p>
                 </div>
             </div>
             <div className="ticket">
                 <p className="big">Ingressos</p>
                 <div className="ticket-details">
-                    <p className="small">assentos</p>
+                    {idSucess.map((i) => <p className="small">Assento {i}</p>)}
                 </div>
             </div>
             <div className="customer">
                 <p className="big">Comprador</p>
                 <div className="customer-details">
-                    <p className="small">Nome: nome do comprador</p>
-                    <p className="small">CPF: cpf do comprador</p>
+                    <p className="small">Nome: {nameSucess}</p>
+                    <p className="small">CPF: {cpfSucess}</p>
                 </div>
             </div>
             <div className="div-button">

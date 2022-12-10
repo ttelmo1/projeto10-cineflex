@@ -4,10 +4,13 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import Seat from "./Seat"
 
-export default function Seats() {
+export default function Seats(props) {
+    const {setNameSucess, setCpfSucess,setIdSucess, setMovieName, setHour} = props
 
+    
     const {idSessao} = useParams()
     const [seats, setSeats] = useState(undefined)
+    
 
     const [name, setName] = useState("")
     const [cpf, setCpf] = useState("")
@@ -19,8 +22,10 @@ export default function Seats() {
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
         promise.then(res => {
-            setSeats(res.data)
+            setSeats(res.data)            
             console.log(res.data)
+            setMovieName(res.data.movie.title)
+            setHour(res.data.day.weekday + " - " + res.data.name)
 
         })
     }, [])
@@ -34,7 +39,15 @@ export default function Seats() {
         
         const promise = axios.post(url_post, order)
         promise.then(res => {
+                       
+            setNameSucess(order.name)
+            setCpfSucess(order.cpf)
+            setIdSucess(order.ids)
+
+
+
             console.log(res.data)
+
             navigate('/sucesso')
         })
 
