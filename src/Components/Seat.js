@@ -1,10 +1,38 @@
 import styled from "styled-components"
 
 export default function Seat(props){
-    const {name} = props
+    const {seat ,id, setId} = props
+
+    
+
+    function selectSeat(seat) {
+        if(!seat.isAvailable){
+            alert('Esse assento não está disponível')
+            return
+        }
+       
+        seat.selected = !seat.selected;
+
+        if(!seat.selected){
+            const filteredSeats = id.filter((i) => !(i === seat.name))
+            setId([...filteredSeats])
+            
+            return
+        }
+
+        console.log(id)
+
+        setId([...id, seat.name])
+        
+    } 
+
     return(
-        <SeatStyle>
-            {name}
+        <SeatStyle 
+        onClick={()=> selectSeat(seat)}
+        isAvailable={seat.isAvailable}
+        selected={seat.selected}
+        >
+            {seat.name}
         </SeatStyle>
     )
 }
@@ -18,8 +46,26 @@ const SeatStyle = styled.div`
 
 
 
-    background: #C3CFD9;
-    border: 1px solid #808F9D;
+    background-color: ${props => {
+        if(props.isAvailable){
+            if(props.selected){
+                return '#1AAE9E'
+            }
+            return '#C3CFD9'
+        }
+        return '#FBE192'
+    }};
+
+    border: 1px solid ${props => {
+        if(props.isAvailable){
+            if(props.selected){
+                return '#0E7D71'
+            }
+            return '#7B8B99'
+        }
+        return '#F7C52B'
+    } };
+
     border-radius: 50%;
 
     font-family: 'Roboto';

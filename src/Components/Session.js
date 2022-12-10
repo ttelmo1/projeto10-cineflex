@@ -4,6 +4,8 @@ import styled from "styled-components"
 export default function Session(props) {
 
     const { weekday, date, showtimes } = props
+
+    console.log(showtimes)
     return (
         <SessionStyle>
             <p>{weekday} - {date}</p>

@@ -1,17 +1,23 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
-import Movie from "./Movie"
 import Seat from "./Seat"
 
-export default function Seats(props) {
+export default function Seats() {
+
+    const {idSessao} = useParams()
     const [seats, setSeats] = useState(undefined)
 
-    // const [size] = props
+    const [name, setName] = useState("")
+    const [cpf, setCpf] = useState("")
+    const [id, setId] = useState([])
+    const navigate = useNavigate()
+    
+   
 
     useEffect(() => {
-        const promise = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/showtimes/1/seats')
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
         promise.then(res => {
             setSeats(res.data)
             console.log(res.data)
@@ -19,13 +25,27 @@ export default function Seats(props) {
         })
     }, [])
 
+    function sendOrder(e){
+        e.preventDefault()
+        const order = { ids: id, name , cpf }
+        console.log(order)
+
+        const url_post = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
+        
+        const promise = axios.post(url_post, order)
+        promise.then(res => {
+            console.log(res.data)
+            navigate('/sucesso')
+        })
+
+    }
 
     return (
-        <>
+        <form onSubmit={sendOrder}>
             <SeatsStyle>
                 <p className="select-seats">Selecione o(s) assento(s)</p>
                 <div className="seats">
-                    {seats?.seats.map((s) => <Seat name={s.name} />)}
+                    {seats?.seats.map((s) => <Seat  id={id} setId={setId} seat={s} />)}
                 </div>
                 <div className="legend">
                     <div>
@@ -43,25 +63,34 @@ export default function Seats(props) {
                 </div>
                 <div className="info">
                     <p>Nome do comprador:</p>
-                    <input type="text" placeholder="Digite seu nome..." />
+                    <input 
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    type="text" 
+                    placeholder="Digite seu nome..." />
                 </div>
                 <div className="info">
                     <p>CPF do comprador:</p>
-                    <input type="text" placeholder="Digite seu CPF..." />
+                    <input 
+                    required
+                    onChange={(e) => setCpf(e.target.value)}
+                    value={cpf}
+                    type="number"
+                    placeholder="Digite seu CPF..." />
                 </div>
-                <Link to="/sucesso">
-                    <button className="book-button">Reservar assento(s)</button>
-                </Link>
-
+                <button type="submit" className="book-button">Reservar assento(s)</button>
             </SeatsStyle>
             <FooterSeats>
-                <Movie posterURL={seats?.movie.posterURL} size={"small"} />
+                <div className="poster">
+                    <img src={seats?.movie.posterURL} />
+                </div>
                 <div>
                     <p>{seats?.movie.title}</p>
                     <p>{seats?.day.weekday} - {seats?.name}</p>
                 </div>
             </FooterSeats>
-        </>
+        </form>
     )
 }
 
@@ -74,6 +103,11 @@ const SeatsStyle = styled.div`
     .select-seats{
         margin-top: 50px;
         margin-bottom: 50px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        color : #293845;
     }
 
     .seats{
@@ -185,8 +219,26 @@ const FooterSeats = styled.footer`
         padding-left: 10px;
         font-family: 'Roboto';
         font-weight: 400;
-        font-size: 20px;
+        font-size: 26px;
         color: #293845;
+    }
+
+    .poster{
+        width: 64px;
+        height: 89px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        background: #FFFFFF;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 2px; 
+    }
+
+    .poster img{
+        width: 48px;
+        height: 72px;
     }
 
     `

@@ -1,20 +1,38 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import styled from "styled-components"
 import Session from "./Session"
 
+// const BASE_URL = 'https://mock-api.driven.com.br/api/v8/cineflex/movies'
+
 export default function Sessions() {
 
+    const {idFilme} = useParams()
+    console.log(useParams)
     const [sessionList, setSessionList] = useState(undefined)
-    console.log(sessionList)
+    
+    
+    
 
     useEffect(() => {
-        const promise = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes')
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
         promise.then(res => {
             setSessionList(res.data)
-
+            console.log(sessionList)
         })
     }, [])
+
+    // useEffect(() => {
+    //     axios.get(`${BASE_URL}/${id}/showtimes`)
+    //     .then(res => setSessionList(res.data))
+    //   }, [id])
+
+    if (sessionList === undefined) {
+        return (
+            <div>Carregando...</div>
+        )
+    }
 
     return (
         <>
@@ -88,4 +106,13 @@ const FooterSessions = styled.footer`
         width: 48px;
         height: 72px;
     }
+
+    p{
+        padding-left: 10px;
+        font-family: 'Roboto';
+        font-weight: 400;
+        font-size: 26px;
+        color: #293845;
+    }
+
 `

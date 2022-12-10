@@ -29,7 +29,8 @@ export default function Home() {
         const promise = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
         promise.then(res => {
             setMovieList(res.data)
-            console.log(res.data)
+            console.log(res.data[0])
+            console.log(res)
         })
     
 
