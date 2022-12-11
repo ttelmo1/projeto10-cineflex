@@ -5,7 +5,7 @@ import styled from "styled-components"
 import Seat from "./Seat"
 
 export default function Seats(props) {
-    const {setNameSucess, setCpfSucess,setIdSucess, setMovieName, setHour} = props
+    const {setNameSucess, setCpfSucess,setIdSucess, setMovieName, setHour, idSucess} = props
 
     
     const {idSessao} = useParams()
@@ -14,7 +14,7 @@ export default function Seats(props) {
 
     const [name, setName] = useState("")
     const [cpf, setCpf] = useState("")
-    const [id, setId] = useState([])
+    const [ids, setIds] = useState([])
     const navigate = useNavigate()
     
    
@@ -32,10 +32,10 @@ export default function Seats(props) {
 
     function sendOrder(e){
         e.preventDefault()
-        const body = { ids: id, name , cpf }
+        const body = { ids, name , cpf }
 
         const url_post = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
-        if(id.length === 0){
+        if(ids.length === 0){
             alert("Selecione pelo menos um assento")
             return
         }
@@ -59,7 +59,7 @@ export default function Seats(props) {
             <SeatsStyle>
                 <p className="select-seats">Selecione o(s) assento(s)</p>
                 <div className="seats">
-                    {seats?.seats.map((s) => <Seat  id={id} setId={setId} seat={s} key={s.id} />)}
+                    {seats?.seats.map((s) => <Seat  id={id} setIds={setIds} seat={s} key={s.id} />)}
                 </div>
                 <div className="legend">
                     <div>

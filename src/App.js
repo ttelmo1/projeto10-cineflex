@@ -26,7 +26,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/sessoes/:idFilme" element={<Sessions/>} />
-          <Route path="/assentos/:idSessao" element={<Seats setNameSucess={setNameSucess} setCpfSucess={setCpfSucess} setIdSucess={setIdSucess} setMovieName={setMovieName} setHour={setHour} />} />
+          <Route path="/assentos/:idSessao" element={<Seats setNameSucess={setNameSucess} setCpfSucess={setCpfSucess} setIdSucess={setIdSucess} setMovieName={setMovieName} setHour={setHour} idSucess={idSucess}/>} />
           <Route path="/sucesso" element={<Sucess  nameSucess={nameSucess} cpfSucess={cpfSucess} idSucess={idSucess} hour={hour} movieName={movieName} />} />
         </Routes>
       </StyleApp>
