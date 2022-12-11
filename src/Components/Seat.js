@@ -1,10 +1,9 @@
 import styled from "styled-components"
 
 export default function Seat(props){
-    const {seat ,id, setId} = props
+    const {seat ,id, setId, setIdSucess, idSucess} = props
 
-    console.log(seat)
-    console.log(id)
+
 
     function selectSeat(seat) {
         if(!seat.isAvailable){
@@ -20,7 +19,9 @@ export default function Seat(props){
             
             return
         }
-        setId([...id, seat.id])        
+        setId([...id, seat.id])
+        setIdSucess([...idSucess, seat.name])
+
     } 
 
     return(

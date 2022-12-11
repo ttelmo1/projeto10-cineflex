@@ -23,7 +23,7 @@ export default function Seats(props) {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
         promise.then(res => {
             setSeats(res.data)
-            console.log(res.data)            
+            console.log(res.data.seats.name)            
             setMovieName(res.data.movie.title)
             setHour(res.data.day.date + "  " + res.data.name)
 
@@ -45,10 +45,11 @@ export default function Seats(props) {
                        
             setNameSucess(body.name)
             setCpfSucess(body.cpf)
-            setIdSucess(body.ids)
+            
             console.log(id)
             console.log(idSucess)
             console.log(body)
+            
 
             console.log(res)
 
@@ -62,7 +63,7 @@ export default function Seats(props) {
             <SeatsStyle>
                 <p className="select-seats">Selecione o(s) assento(s)</p>
                 <div className="seats">
-                    {seats?.seats.map((s) => <Seat  id={id} setId={setId} seat={s} key={s.id} />)}
+                    {seats?.seats.map((s) => <Seat  id={id} setId={setId} seat={s} key={s.id} setIdSucess={setIdSucess} idSucess={idSucess}/>)}
                 </div>
                 <div className="legend">
                     <div>
