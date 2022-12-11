@@ -14,18 +14,18 @@ export default function Sucess(props) {
             </div>
             <div className="movie">
                 <p className="big">Filme e sessão</p>
-                <div className="movie-details">
+                <div className="movie-details" data-test="movie-info">
                     <p className="small">{movieName}</p>
                     <p className="small">{hour}</p>
                 </div>
             </div>
-            <div className="ticket">
+            <div className="ticket" data-test="seats-info">
                 <p className="big">Ingressos</p>
-                <div className="ticket-details">
-                    {idSucess.map((i) => <p className="small">Assento {i}</p>)}
+                <div className="ticket-details" >
+                    {idSucess.map((i) => <p className="small" key={i} >Assento {i}</p>)}
                 </div>
             </div>
-            <div className="customer">
+            <div className="customer" data-test="client-info">
                 <p className="big">Comprador</p>
                 <div className="customer-details">
                     <p className="small">Nome: {nameSucess}</p>
@@ -33,7 +33,7 @@ export default function Sucess(props) {
                 </div>
             </div>
             <div className="div-button">
-                <Link to="/">
+                <Link to="/" data-test="go-home-btn">
                     <button className="back-button">Voltar para Home</button>
                 </Link>
 

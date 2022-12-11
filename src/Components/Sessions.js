@@ -8,7 +8,6 @@ import Session from "./Session"
 export default function Sessions() {
 
     const {idFilme} = useParams()
-    console.log(useParams)
     const [sessionList, setSessionList] = useState(undefined)
     
 
@@ -16,7 +15,6 @@ export default function Sessions() {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
         promise.then(res => {
             setSessionList(res.data)
-            console.log(sessionList)
         })
     }, [])
 
@@ -35,7 +33,7 @@ export default function Sessions() {
                 </div>
 
             </SessionsStyle>
-            <FooterSessions>
+            <FooterSessions data-test="footer">
                 <div><img src={sessionList?.posterURL} /></div>
                 <p>{sessionList?.title}</p>
             </FooterSessions>

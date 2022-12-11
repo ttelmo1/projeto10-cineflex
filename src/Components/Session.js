@@ -3,15 +3,13 @@ import styled from "styled-components"
 
 export default function Session(props) {
 
-    const { weekday, date, showtimes } = props
-
-    console.log(showtimes)
+    const { weekday, date, showtimes} = props
     return (
-        <SessionStyle>
+        <SessionStyle data-test="movie-day">
             <p>{weekday} - {date}</p>
             {showtimes.map((s) =>
-                <Link to={`/assentos/${s.id}`}>
-                    <button key={s.name} >{s.name}</button>
+                <Link to={`/assentos/${s.id}`} key={s.id} data-test="showtime">
+                    <button >{s.name}</button>
                 </Link>
 
             )}

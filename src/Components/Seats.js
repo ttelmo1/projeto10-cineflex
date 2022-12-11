@@ -22,10 +22,10 @@ export default function Seats(props) {
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
         promise.then(res => {
-            setSeats(res.data)            
-            console.log(res.data)
+            setSeats(res.data)
+            console.log(res.data)            
             setMovieName(res.data.movie.title)
-            setHour(res.data.day.weekday + " - " + res.data.name)
+            setHour(res.data.day.date + "  " + res.data.name)
 
         })
     }, [])
@@ -36,6 +36,10 @@ export default function Seats(props) {
         console.log(order)
 
         const url_post = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
+        if(id.length === 0){
+            alert("Selecione pelo menos um assento")
+            return
+        }
         
         const promise = axios.post(url_post, order)
         promise.then(res => {
@@ -43,8 +47,6 @@ export default function Seats(props) {
             setNameSucess(order.name)
             setCpfSucess(order.cpf)
             setIdSucess(order.ids)
-
-
 
             console.log(res.data)
 
@@ -58,7 +60,7 @@ export default function Seats(props) {
             <SeatsStyle>
                 <p className="select-seats">Selecione o(s) assento(s)</p>
                 <div className="seats">
-                    {seats?.seats.map((s) => <Seat  id={id} setId={setId} seat={s} />)}
+                    {seats?.seats.map((s) => <Seat  id={id} setId={setId} seat={s} key={s.id} />)}
                 </div>
                 <div className="legend">
                     <div>
@@ -80,6 +82,7 @@ export default function Seats(props) {
                     required
                     onChange={(e) => setName(e.target.value)}
                     value={name}
+                    data-test="client-name"
                     type="text" 
                     placeholder="Digite seu nome..." />
                 </div>
@@ -89,13 +92,14 @@ export default function Seats(props) {
                     required
                     onChange={(e) => setCpf(e.target.value)}
                     value={cpf}
+                    data-test="client-cpf"
                     type="number"
                     placeholder="Digite seu CPF..." />
                 </div>
-                <button type="submit" className="book-button">Reservar assento(s)</button>
+                <button type="submit" className="book-button" data-test="book-seat-btn">Reservar assento(s)</button>
             </SeatsStyle>
             <FooterSeats>
-                <div className="poster">
+                <div className="poster" data-test="footer">
                     <img src={seats?.movie.posterURL} />
                 </div>
                 <div>
@@ -198,7 +202,7 @@ const SeatsStyle = styled.div`
    .book-button{
         width: 225px;
         height: 42px;
-        margin-top: 50px;
+        margin-top: 25px;
 
         background-color: #E8833A;
         border-radius: 3px;

@@ -7,8 +7,8 @@ export default function Movie(props) {
     const { id, title, posterURL, size } = props
 
     return (
-        <MovieStyle >
-            <Link to={`/sessoes/${id}`}>
+        <MovieStyle data-test="movie">
+            <Link to={`/sessoes/${id}`} >
                 <img src={posterURL} />
             </Link>
         </MovieStyle>

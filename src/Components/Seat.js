@@ -19,11 +19,7 @@ export default function Seat(props){
             
             return
         }
-
-        console.log(id)
-
-        setId([...id, seat.name])
-        
+        setId([...id, seat.name])        
     } 
 
     return(
@@ -31,6 +27,8 @@ export default function Seat(props){
         onClick={()=> selectSeat(seat)}
         isAvailable={seat.isAvailable}
         selected={seat.selected}
+        key={seat.id}
+        data-test="seat"
         >
             {seat.name}
         </SeatStyle>
