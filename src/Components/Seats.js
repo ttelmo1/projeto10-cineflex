@@ -14,7 +14,7 @@ export default function Seats(props) {
 
     const [name, setName] = useState("")
     const [cpf, setCpf] = useState("")
-    const [ids, setIds] = useState([])
+    const [id, setId] = useState([])
     const navigate = useNavigate()
     
    
@@ -32,10 +32,10 @@ export default function Seats(props) {
 
     function sendOrder(e){
         e.preventDefault()
-        const body = { ids, name , cpf }
+        const body = { ids: id, name , cpf }
 
         const url_post = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
-        if(ids.length === 0){
+        if(id.length === 0){
             alert("Selecione pelo menos um assento")
             return
         }
@@ -46,8 +46,11 @@ export default function Seats(props) {
             setNameSucess(body.name)
             setCpfSucess(body.cpf)
             setIdSucess(body.ids)
+            console.log(id)
+            console.log(idSucess)
+            console.log(body)
 
-            console.log(res.data)
+            console.log(res)
 
             navigate('/sucesso')
         })
@@ -59,7 +62,7 @@ export default function Seats(props) {
             <SeatsStyle>
                 <p className="select-seats">Selecione o(s) assento(s)</p>
                 <div className="seats">
-                    {seats?.seats.map((s) => <Seat  id={id} setIds={setIds} seat={s} key={s.id} />)}
+                    {seats?.seats.map((s) => <Seat  id={id} setId={setId} seat={s} key={s.id} />)}
                 </div>
                 <div className="legend">
                     <div>
