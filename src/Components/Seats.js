@@ -33,7 +33,6 @@ export default function Seats(props) {
     function sendOrder(e){
         e.preventDefault()
         const body = { ids: id, name , cpf }
-        console.log(order)
 
         const url_post = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
         if(id.length === 0){
@@ -56,7 +55,7 @@ export default function Seats(props) {
     }
 
     return (
-        <form onSubmit={sendOrder}>
+        <FormStyle onSubmit={sendOrder}>
             <SeatsStyle>
                 <p className="select-seats">Selecione o(s) assento(s)</p>
                 <div className="seats">
@@ -107,9 +106,13 @@ export default function Seats(props) {
                     <p>{seats?.day.weekday} - {seats?.name}</p>
                 </div>
             </FooterSeats>
-        </form>
+        </FormStyle>
     )
 }
+
+const FormStyle = styled.form`
+    padding-bottom: 150px;
+`
 
 const SeatsStyle = styled.div`
     display: flex;
