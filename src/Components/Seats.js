@@ -32,7 +32,7 @@ export default function Seats(props) {
 
     function sendOrder(e){
         e.preventDefault()
-        const order = { ids: id, name , cpf }
+        const body = { ids: id, name , cpf }
         console.log(order)
 
         const url_post = `https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many`
@@ -41,12 +41,12 @@ export default function Seats(props) {
             return
         }
         
-        const promise = axios.post(url_post, order)
+        const promise = axios.post(url_post, body)
         promise.then(res => {
                        
-            setNameSucess(order.name)
-            setCpfSucess(order.cpf)
-            setIdSucess(order.ids)
+            setNameSucess(body.name)
+            setCpfSucess(body.cpf)
+            setIdSucess(body.ids)
 
             console.log(res.data)
 
@@ -98,8 +98,8 @@ export default function Seats(props) {
                 </div>
                 <button type="submit" className="book-button" data-test="book-seat-btn">Reservar assento(s)</button>
             </SeatsStyle>
-            <FooterSeats>
-                <div className="poster" data-test="footer">
+            <FooterSeats data-test="footer">
+                <div className="poster" >
                     <img src={seats?.movie.posterURL} />
                 </div>
                 <div>
